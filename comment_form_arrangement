@@ -1,0 +1,27 @@
+
+
+//Comment Field Order
+add_filter( 'comment_form_fields', 'mo_comment_fields_custom_order' );
+function mo_comment_fields_custom_order( $fields ) {
+    $comment_field = $fields['comment'];
+    $author_field = $fields['author'];
+    $email_field = $fields['email'];
+    $url_field = $fields['url'];
+    $cookies_field = $fields['cookies'];
+    unset( $fields['comment'] );
+    unset( $fields['author'] );
+    unset( $fields['email'] );
+    unset( $fields['url'] );
+    unset( $fields['cookies'] );
+    unset( $fields['submit_button'] );
+    unset( $fields['submit_field'] );
+    // the order of fields is the order below, change it as needed:
+    $fields['author'] = '<div class="row"><div class="col-md-6"><p class="comment-form-author">Name <span class="required">*</span><input type="text" id="author" name="author" require="required" placeholder="Name"></p></div>';
+    $fields['email'] = '<div class="col-md-6"><p class="comment-form-email"><label for="email">Email <span class="required">*</span></label><input type="text" id="email" name="email" require="required" placeholder="Email"></p></div></div>';
+    // $fields['url'] = $url_field;
+    $fields['comment'] = $comment_field;
+    $fields['cookies'] = $cookies_field;
+    $fields['submit_button'] = '<input name="submit" type="submit" id="submit" class="submit" value="Post">';
+    // done ordering, now return the fields:
+    return $fields;
+}
